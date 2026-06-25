@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lab05-pod
+spec:
+  containers:
+    - name: app
+      image: alpine
+      command: ["sh", "-c", "env && sleep 3600"]
+      env:
+        - name: APP_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: lab05-config
+              key: APP_ENV
+        - name: APP_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: lab05-config
+              key: APP_PORT
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: lab05-secret
+              key: DB_PASSWORD
+        - name: API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: lab05-secret
+              key: API_KEY

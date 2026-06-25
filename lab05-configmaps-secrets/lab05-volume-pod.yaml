@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lab05-volume-pod
+spec:
+  containers:
+    - name: app
+      image: alpine
+      command: ["sh", "-c", "cat /config/welcome_message && sleep 3600"]
+      volumeMounts:
+        - name: config-volume
+          mountPath: /config
+  volumes:
+    - name: config-volume
+      configMap:
+        name: lab05-config
