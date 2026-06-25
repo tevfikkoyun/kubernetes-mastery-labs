@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lab10-oom
+spec:
+  containers:
+    - name: memory-hog
+      image: alpine
+      command: ["sh", "-c", "cat /dev/zero | head -c 200m | tail"]
+      resources:
+        limits:
+          memory: "50Mi"
