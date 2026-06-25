@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lab07-pod
+spec:
+  containers:
+    - name: app
+      image: alpine
+      command: ["sh", "-c", "echo 'data written by pod' > /data/test.txt && cat /data/test.txt && sleep 3600"]
+      volumeMounts:
+        - name: storage
+          mountPath: /data
+  volumes:
+    - name: storage
+      persistentVolumeClaim:
+        claimName: lab07-pvc
