@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lab09-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lab09-app
+  template:
+    metadata:
+      labels:
+        app: lab09-app
+    spec:
+      containers:
+        - name: app
+          image: nginx:alpine
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            failureThreshold: 3

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lab09-readiness
+  labels:
+    app: lab09-readiness
+spec:
+  containers:
+    - name: app
+      image: nginx:alpine
+      readinessProbe:
+        httpGet:
+          path: /ready
+          port: 80
+        initialDelaySeconds: 5
+        periodSeconds: 5
+        failureThreshold: 3
