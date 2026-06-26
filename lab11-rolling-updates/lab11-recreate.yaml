@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lab11-recreate
+spec:
+  replicas: 3
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: lab11-recreate
+  template:
+    metadata:
+      labels:
+        app: lab11-recreate
+    spec:
+      containers:
+        - name: app
+          image: nginx:1.25-alpine
